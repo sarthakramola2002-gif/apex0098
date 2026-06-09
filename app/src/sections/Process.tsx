@@ -54,7 +54,7 @@ export default function Process() {
     const ctx = gsap.context(() => {
       const cards = cardsRef.current.filter(Boolean);
 
-      cards.forEach((card, i) => {
+     cards.forEach((card) => {
         if (!card) return;
 
         const initRotX = randomRange(-35, 35);
