@@ -30,12 +30,7 @@ export default function BeforeAfter() {
       handleRef.current.style.left = `${pos * 100}%`;
     }
 
-    // Update before image filter proportionally
-    if (beforeImgRef.current) {
-      const saturate = 0.15 + (1 - 0.15) * pos;
-      const brightness = 0.65 + (1 - 0.65) * pos;
-      beforeImgRef.current.style.filter = `saturate(${saturate}) brightness(${brightness}) contrast(1.1)`;
-    }
+    // Remove dynamic filter update to keep before image dull
   }, []);
 
   useEffect(() => {
@@ -131,14 +126,15 @@ export default function BeforeAfter() {
         {/* Comparison slider */}
         <div
           ref={trackRef}
-          className="relative w-full aspect-[16/7] min-h-[300px] rounded-lg overflow-hidden cursor-ew-resize select-none"
+          className="relative w-full aspect-[4/3] md:aspect-[16/7] min-h-[300px] rounded-lg overflow-hidden cursor-ew-resize select-none"
+          style={{ touchAction: 'none' }}
         >
           {/* Before image (bottom layer) */}
           <img
             ref={beforeImgRef}
-            src="/images/before-paint.jpg"
+            src="/images/hero-car.jpg"
             alt="Before paint correction"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-contain"
             style={{
               filter: 'saturate(0.15) brightness(0.65) contrast(1.1)',
             }}
@@ -152,9 +148,9 @@ export default function BeforeAfter() {
             style={{ clipPath: 'inset(0 50% 0 0)' }}
           >
             <img
-              src="/images/after-paint.jpg"
+              src="/images/hero-car.jpg"
               alt="After paint correction"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
               draggable={false}
             />
           </div>

@@ -48,7 +48,6 @@ function randomRange(min: number, max: number) {
 
 export default function Process() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -58,45 +57,21 @@ export default function Process() {
       cards.forEach((card, i) => {
         if (!card) return;
 
-        // Random initial 3D orientation
-        const initRotX = randomRange(-45, 45);
-        const initRotY = randomRange(-30, 30);
-        const initRotZ = randomRange(-10, 10);
-
-        gsap.set(card, {
-          rotationX: initRotX,
-          rotationY: initRotY,
-          rotationZ: initRotZ,
-          scale: 0.7,
-          filter: 'brightness(0%)',
-        });
-
-        // Animate to settled state
-        gsap.to(card, {
-          rotationX: 0,
-          rotationY: 0,
-          rotationZ: 0,
-          scale: 1,
-          filter: 'brightness(100%)',
-          ease: 'power1.inOut',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top bottom',
-            end: 'center center',
-            scrub: true,
-          },
-        });
-
-        // Exit wobble
-        gsap.to(card, {
-          rotationZ: i % 2 === 0 ? 3 : -3,
-          scrollTrigger: {
-            trigger: card,
-            start: 'center center',
-            end: 'bottom top',
-            scrub: true,
-          },
-        });
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 80 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
       });
     }, sectionRef);
 
@@ -106,38 +81,12 @@ export default function Process() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full"
-      style={{ height: '300vh', background: '#0E0709' }}
+      className="relative w-full py-24 md:py-32"
+      style={{ background: '#0E0709' }}
     >
-      {/* Sticky grid container */}
-      <div
-        ref={gridRef}
-        className="sticky top-0 w-full overflow-hidden"
-        style={{
-          height: '100vh',
-          perspective: '1000px',
-        }}
-      >
-        {/* Top fade overlay */}
-        <div
-          className="absolute top-0 left-0 right-0 z-10 pointer-events-none"
-          style={{
-            height: '12vh',
-            background: 'linear-gradient(to bottom, #0E0709, transparent)',
-          }}
-        />
-
-        {/* Bottom fade overlay */}
-        <div
-          className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none"
-          style={{
-            height: '12vh',
-            background: 'linear-gradient(to top, #0E0709, transparent)',
-          }}
-        />
-
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12">
         {/* Section heading */}
-        <div className="absolute top-8 left-0 right-0 z-20 text-center">
+        <div className="text-center mb-16 md:mb-24">
           <h2
             className="font-display text-outline leading-none"
             style={{ fontSize: 'clamp(36px, 7vw, 100px)' }}
@@ -147,36 +96,28 @@ export default function Process() {
         </div>
 
         {/* Grid */}
-        <div
-          className="w-full h-full grid gap-6 p-8 pt-28"
-          style={{
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gridTemplateRows: 'repeat(8, 1fr)',
-            transformStyle: 'preserve-3d',
-          }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {steps.map((step, i) => (
             <div
               key={step.num}
               ref={(el) => { cardsRef.current[i] = el; }}
-              className="relative transition-all duration-300 hover:border-[#E879A0]/50 group"
+              className="relative transition-all duration-500 hover:border-[#E879A0]/50 group"
               style={{
-                gridColumn: step.col,
-                gridRow: step.row,
                 background: 'rgba(20, 8, 13, 0.8)',
                 border: '1px solid rgba(232,121,160,0.25)',
                 borderRadius: '12px',
-                padding: '32px',
-                transformStyle: 'preserve-3d',
+                padding: '40px 32px',
+                // Optional staggered layout for desktop
+                marginTop: typeof window !== 'undefined' && window.innerWidth >= 768 && i % 2 !== 0 ? '40px' : '0px',
               }}
             >
-              <span className="font-display text-[#E879A0] text-5xl leading-none block mb-3">
+              <span className="font-display text-[#E879A0] text-5xl md:text-6xl leading-none block mb-4 transition-transform duration-500 group-hover:-translate-y-2">
                 {step.num}
               </span>
-              <h3 className="text-white text-lg font-body uppercase tracking-wide mb-2">
+              <h3 className="text-white text-xl font-body uppercase tracking-wide mb-3">
                 {step.title}
               </h3>
-              <p className="text-white/50 text-sm font-body leading-relaxed">
+              <p className="text-white/50 text-base font-body leading-relaxed">
                 {step.desc}
               </p>
             </div>

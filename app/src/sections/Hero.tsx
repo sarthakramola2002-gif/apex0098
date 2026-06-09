@@ -117,12 +117,12 @@ export default function Hero() {
         <span className="font-display text-[#E879A0] text-[13px] tracking-[0.25em] mb-2">
           APEX DETAIL STUDIO
         </span>
-        <div className="flex gap-8">
+        <div className="flex gap-4 md:gap-8 flex-wrap justify-center px-4">
           {['Services', 'Pricing', 'Reviews', 'Contact'].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
-              className="text-white/70 text-[11px] uppercase tracking-[0.2em] hover:text-[#E879A0] transition-colors duration-300 font-body"
+              className="text-white/70 text-[10px] md:text-[11px] uppercase tracking-[0.2em] hover:text-[#E879A0] transition-colors duration-300 font-body"
             >
               {item}
             </a>
@@ -133,13 +133,13 @@ export default function Hero() {
       {/* Typography Plane - z-index 1 */}
       <div
         ref={textRef}
-        className="absolute inset-0 z-[1] flex items-center justify-center opacity-0 pointer-events-none select-none"
+        className="absolute inset-0 z-[1] flex items-center justify-center opacity-0 pointer-events-none select-none px-4"
         style={{ top: '-5vh' }}
       >
         <h1
           className="font-display text-outline whitespace-nowrap leading-none"
           style={{
-            fontSize: 'clamp(80px, 18vw, 280px)',
+            fontSize: 'clamp(40px, 15vw, 280px)',
             letterSpacing: '0.02em',
           }}
         >
@@ -148,12 +148,12 @@ export default function Hero() {
       </div>
 
       {/* Car Plane - z-index 2 */}
-      <div className="absolute inset-0 z-[2] flex items-center justify-center pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 z-[2] flex items-center justify-center pointer-events-none overflow-hidden px-4 md:px-0">
         <img
           ref={carRef}
           src="/images/hero-car.jpg"
           alt="Porsche 911 GT3 RS in rose-pink studio lighting"
-          className="min-w-[105vw] min-h-[125vh] object-cover object-center opacity-0 translate-y-8"
+          className="w-full h-auto max-h-[80vh] md:min-w-[105vw] md:min-h-[125vh] object-contain md:object-cover object-center opacity-0 translate-y-8"
           style={{
             filter: 'drop-shadow(0 20px 60px rgba(0,0,0,0.5))',
           }}
@@ -165,23 +165,23 @@ export default function Hero() {
         {/* Stats Strip */}
         <div
           ref={statsRef}
-          className="flex items-center gap-6 mb-6 opacity-0 translate-y-4"
+          className="flex flex-wrap justify-center items-center gap-3 md:gap-6 mb-6 opacity-0 translate-y-4 px-4 text-center"
         >
-          <span className="text-white/50 text-[13px] font-body tracking-wide">290+ Cars Detailed</span>
-          <span className="w-px h-4 bg-white/20" />
-          <span className="text-white/50 text-[13px] font-body tracking-wide">8 Years Experience</span>
-          <span className="w-px h-4 bg-white/20" />
-          <span className="text-white/50 text-[13px] font-body tracking-wide">98% 5-Star Reviews</span>
+          <span className="text-white/50 text-[11px] md:text-[13px] font-body tracking-wide">290+ Cars Detailed</span>
+          <span className="hidden md:block w-px h-4 bg-white/20" />
+          <span className="text-white/50 text-[11px] md:text-[13px] font-body tracking-wide">8 Years Experience</span>
+          <span className="hidden md:block w-px h-4 bg-white/20" />
+          <span className="text-white/50 text-[11px] md:text-[13px] font-body tracking-wide">98% 5-Star Reviews</span>
         </div>
 
         {/* CTAs */}
         <div
           ref={ctaRef}
-          className="flex gap-4 opacity-0 translate-y-4 pointer-events-auto"
+          className="flex flex-wrap justify-center gap-3 md:gap-4 opacity-0 translate-y-4 pointer-events-auto px-4"
         >
-          <a href="#pricing" className="pill-btn-white">View Pricing</a>
-          <a href="#booking" className="pill-btn-white">Book a Detail</a>
-          <a href="#reviews" className="pill-btn-white">See Reviews</a>
+          <a href="#pricing" className="pill-btn-white text-[11px] md:text-sm px-4 py-2 md:px-6 md:py-3">View Pricing</a>
+          <a href="#booking" className="pill-btn-white text-[11px] md:text-sm px-4 py-2 md:px-6 md:py-3">Book a Detail</a>
+          <a href="#reviews" className="pill-btn-white text-[11px] md:text-sm px-4 py-2 md:px-6 md:py-3">See Reviews</a>
         </div>
       </div>
     </section>
