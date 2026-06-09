@@ -57,14 +57,29 @@ export default function Process() {
       cards.forEach((card, i) => {
         if (!card) return;
 
+        const initRotX = randomRange(-35, 35);
+        const initRotY = randomRange(-20, 20);
+        const initRotZ = randomRange(-10, 10);
+
         gsap.fromTo(
           card,
-          { opacity: 0, y: 80 },
+          { 
+            opacity: 0, 
+            y: 120,
+            rotationX: initRotX,
+            rotationY: initRotY,
+            rotationZ: initRotZ,
+            scale: 0.75,
+          },
           {
             opacity: 1,
             y: 0,
-            duration: 1.2,
-            ease: 'power3.out',
+            rotationX: 0,
+            rotationY: 0,
+            rotationZ: 0,
+            scale: 1,
+            duration: 1.4,
+            ease: 'back.out(1.2)',
             scrollTrigger: {
               trigger: card,
               start: 'top 85%',
@@ -96,17 +111,21 @@ export default function Process() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+          style={{ perspective: '1200px' }}
+        >
           {steps.map((step, i) => (
             <div
               key={step.num}
               ref={(el) => { cardsRef.current[i] = el; }}
-              className="relative transition-all duration-500 hover:border-[#E879A0]/50 group"
+              className="relative transition-colors duration-500 hover:border-[#E879A0]/50 group"
               style={{
                 background: 'rgba(20, 8, 13, 0.8)',
                 border: '1px solid rgba(232,121,160,0.25)',
                 borderRadius: '12px',
                 padding: '40px 32px',
+                transformStyle: 'preserve-3d',
                 // Optional staggered layout for desktop
                 marginTop: typeof window !== 'undefined' && window.innerWidth >= 768 && i % 2 !== 0 ? '40px' : '0px',
               }}

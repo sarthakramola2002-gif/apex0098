@@ -126,20 +126,22 @@ export default function BeforeAfter() {
         {/* Comparison slider */}
         <div
           ref={trackRef}
-          className="relative w-full aspect-[4/3] md:aspect-[16/7] min-h-[300px] rounded-lg overflow-hidden cursor-ew-resize select-none"
+          className="relative w-full aspect-[4/5] md:aspect-[16/7] min-h-[300px] rounded-lg overflow-hidden cursor-ew-resize select-none"
           style={{ touchAction: 'none' }}
         >
           {/* Before image (bottom layer) */}
-          <img
-            ref={beforeImgRef}
-            src="/images/hero-car.jpg"
-            alt="Before paint correction"
-            className="absolute inset-0 w-full h-full object-contain"
-            style={{
-              filter: 'saturate(0.15) brightness(0.65) contrast(1.1)',
-            }}
-            draggable={false}
-          />
+          <div className="absolute inset-0 w-full h-full">
+            <img
+              ref={beforeImgRef}
+              src="/images/before-paint.jpg"
+              alt="Before paint correction"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ filter: 'brightness(0.65) contrast(1.1)' }}
+              draggable={false}
+            />
+            {/* Pink colorization overlay */}
+            <div className="absolute inset-0 bg-[#E879A0] mix-blend-color opacity-70 pointer-events-none" />
+          </div>
 
           {/* After image (top layer, clipped) */}
           <div
@@ -148,11 +150,13 @@ export default function BeforeAfter() {
             style={{ clipPath: 'inset(0 50% 0 0)' }}
           >
             <img
-              src="/images/hero-car.jpg"
+              src="/images/after-paint.jpg"
               alt="After paint correction"
-              className="w-full h-full object-contain"
+              className="absolute inset-0 w-full h-full object-cover"
               draggable={false}
             />
+            {/* Pink colorization overlay */}
+            <div className="absolute inset-0 bg-[#E879A0] mix-blend-color opacity-70 pointer-events-none" />
           </div>
 
           {/* Handle */}
