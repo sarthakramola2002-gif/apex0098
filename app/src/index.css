@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --studio-maroon: #0E0709;
+    --deep-wine: #1A0810;
+    --hot-pink: #E879A0;
+    --rose-pink: #F4A0B8;
+    --ghost-white: #FAFAFA;
+    --muted-white: rgba(255, 255, 255, 0.5);
+    --glass-border: rgba(232, 121, 160, 0.2);
+    --review-border: rgba(255, 255, 255, 0.08);
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.625rem;
+  }
+
+  body {
+    @apply bg-[#0E0709] text-[#FAFAFA];
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    @apply border-border;
+  }
+}
+
+@layer components {
+  .font-display {
+    font-family: 'Bebas Neue', sans-serif;
+  }
+
+  .font-serif {
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .text-outline {
+    -webkit-text-stroke: 2.5px #E879A0;
+    color: transparent;
+  }
+
+  .text-outline-thin {
+    -webkit-text-stroke: 1.5px #E879A0;
+    color: transparent;
+  }
+
+  .glass-panel {
+    background: rgba(20, 8, 13, 0.75);
+    border: 1px solid rgba(232, 121, 160, 0.2);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 16px;
+  }
+
+  .pill-btn {
+    @apply inline-flex items-center justify-center px-6 py-2.5 rounded-full border transition-all duration-300;
+  }
+
+  .pill-btn-white {
+    @apply pill-btn border-white/40 text-white text-[11px] uppercase tracking-[0.2em];
+  }
+
+  .pill-btn-white:hover {
+    background: rgba(232, 121, 160, 0.15);
+    border-color: rgba(232, 121, 160, 0.6);
+  }
+
+  .pill-btn-pink {
+    @apply pill-btn border-[#E879A0] text-[#E879A0] text-[11px] uppercase tracking-[0.2em];
+  }
+
+  .pill-btn-pink:hover {
+    background: rgba(232, 121, 160, 0.12);
+  }
+
+  .pill-btn-filled {
+    @apply pill-btn bg-[#E879A0] text-[#0E0709] font-semibold text-[11px] uppercase tracking-[0.2em] border-transparent;
+  }
+
+  .pill-btn-filled:hover {
+    background: #C4567E;
+  }
+}
+
+/* Testimonial ticker animation */
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-track {
+  animation: scrollLeft 40s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* Hide scrollbar for cleaner look */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(232, 121, 160, 0.3) #0E0709;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0E0709;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(232, 121, 160, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 121, 160, 0.5);
+}
